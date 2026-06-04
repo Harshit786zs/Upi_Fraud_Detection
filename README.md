@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="reports/images/banner.png" width="900">
+</p>
  # UPI Fraud Detection System
 
 ## Overview
