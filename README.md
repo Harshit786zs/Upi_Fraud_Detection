@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="reports/images/banner.png" width="900">
-</p>
+  <img src="reports/images/banner.png" alt="UPI Fraud Detection Banner" width="100%">
+</p> 
  # UPI Fraud Detection System
 
 ## Overview
