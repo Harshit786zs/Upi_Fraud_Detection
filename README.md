@@ -1,88 +1,40 @@
-<p align="center">
-  <img src="reports/images/banner.jpg" alt="UPI Fraud Detection Banner" width="900%">
-</p> 
- # UPI Fraud Detection System
+# 🛡️ UPI Fraud Detection System
 
-## Overview
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green)
+![XGBoost](https://img.shields.io/badge/XGBoost-97.94%25_ROC--AUC-orange)
+![React](https://img.shields.io/badge/React-Dashboard-61DAFB)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-UPI Fraud Detection System is a Machine Learning-based application designed to identify fraudulent digital payment transactions in real time. The system uses an XGBoost classifier along with feature engineering and risk scoring techniques to detect suspicious transaction patterns and enhance payment security.
+> Real-time ML-powered UPI fraud detection with role-based dashboard, 
+> SHAP explainability, and risk scoring engine.
 
-## Features
+---
 
-* Real-time fraud prediction
-* XGBoost-based machine learning model
-* Fraud probability estimation
-* Dynamic risk scoring
-* High-value transaction detection
-* Night-time transaction monitoring
-* FastAPI REST API
-* Model performance comparison
+## 🚀 Live Demo
 
-## Tech Stack
+| Component | Link |
+|---|---|
+| React Dashboard | `http://localhost:3000` |
+| FastAPI Swagger | `http://localhost:8000/docs` |
+| Frontend Repo | [fraud-dashboard](https://github.com/Harshit786zs/fraud-dashboard) |
 
-* Python
-* FastAPI
-* XGBoost
-* Scikit-learn
-* Pandas
-* NumPy
-* Joblib
+---
 
-## Machine Learning Models
+## 📸 Screenshots
 
-| Model               | Accuracy |
-| ------------------- | -------- |
-| Logistic Regression | 96.34%   |
-| Random Forest       | 96.07%   |
-| XGBoost             | 97.94%   |
+### Login Page
+> Role-based login — Admin and Analyst roles
 
-XGBoost achieved the best performance and was selected for deployment.
+### Live Transaction Feed
+> Real-time transactions scored by XGBoost every 1.8 seconds
 
-## API Endpoints
+### Transaction Tester
+> Test any transaction amount and get instant fraud prediction
 
-### GET /
+### Model Performance
+> Compare Logistic Regression, Random Forest, XGBoost
 
-Returns API status.
+---
 
-### GET /health
-
-Checks API health.
-
-### GET /stats
-
-Displays model performance metrics.
-
-### POST /predict
-
-Predicts fraud probability and generates a risk score for a transaction.
-
-## Project Workflow
-
-1. Data Collection
-2. Data Preprocessing
-3. Feature Engineering
-4. Model Training
-5. Model Evaluation
-6. Risk Scoring
-7. API Deployment with FastAPI
-
-## Installation
-
-```bash
-git clone https://github.com/your-username/UPI-Fraud-Detection.git
-cd UPI-Fraud-Detection
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-## Future Enhancements
-
-* Power BI Dashboard
-* Explainable AI (SHAP)
-* Real-Time Streaming Detection
-* Geo-location Risk Analysis
-* Cloud Deployment
-
-## Author
-
-Harshit Choudhary
+## 🧠 How It Works 
