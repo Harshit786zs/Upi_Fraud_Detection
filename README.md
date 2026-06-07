@@ -20,6 +20,22 @@
 UPI fraud in India grew **85% year-over-year** in FY 2024-25. This system detects fraudulent transactions in real-time using a hybrid ML ensemble, explains every decision using SHAP, and visualizes everything on a live React dashboard with role-based access.
 
 ---
+## 📸 Screenshots
+
+### API Documentation
+![API](reports/api-docs.png)
+
+### Login Page
+![Login](reports/login.png)
+
+### Live Transaction Feed
+![Live Feed](reports/live-feed.png)
+
+### Transaction Tester
+![Tester](reports/tester.png)
+
+### Model Performance
+![Models](reports/models.png)
 
 ## Architecture
 Dataset → Cleaning → Feature Engineering → XGBoost Model
