@@ -136,7 +136,7 @@ src/
 
 <div align="center">
 
-**Harshit Choudhary** — Final Year B.Tech CSE  
+**Harshit Choudhary**  
 [![GitHub](https://img.shields.io/badge/GitHub-Harshit786zs-181717?style=flat-square&logo=github)](https://github.com/Harshit786zs)
 
 </div>
