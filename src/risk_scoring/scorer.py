@@ -3,21 +3,18 @@ import numpy as np
 import joblib
 
 def get_risk_score(fraud_prob, is_high_amount=0, is_night=0, amount_zscore=0):
-    """
-    Calculate risk score 0-100 from multiple signals.
-    """
     score = 0
-    score += fraud_prob * 60          # 60% weight on model probability
-    score += is_high_amount * 15      # high amount adds 15 points
-    score += is_night * 10            # night transaction adds 10 points
-    score += min(abs(amount_zscore) * 5, 15)  # amount deviation max 15 points
+    score += fraud_prob * 50
+    score += is_high_amount * 25
+    score += is_night * 15
+    score += min(abs(amount_zscore) * 8, 25)
 
     score = min(score, 100)
 
     if score <= 30:
         level = "LOW"
         action = "ALLOW"
-    elif score <= 60:
+    elif score <= 55:
         level = "MEDIUM"
         action = "CHALLENGE"
     else:
@@ -29,7 +26,7 @@ def get_risk_score(fraud_prob, is_high_amount=0, is_night=0, amount_zscore=0):
         "risk_level": level,
         "action": action
     }
-
+    
 def score_dataset(path="data/processed/features.csv"):
     print("Scoring transactions...")
     model = joblib.load("models/saved/XGBoost.pkl")
