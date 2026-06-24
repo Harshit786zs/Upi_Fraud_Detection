@@ -1,142 +1,130 @@
-<div align="center">
+ ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange)
+![ROC--AUC](https://img.shields.io/badge/ROC--AUC-97.94%25-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-# 🛡️ UPI Fraud Detection System
+![UPI Fraud Detection Banner](reports/images/banner.jpg)
 
-![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![XGBoost](https://img.shields.io/badge/XGBoost-97.94%25_ROC--AUC-FF6600?style=for-the-badge)
+# UPI Fraud Detection System
 
-**Real-time ML-powered UPI fraud detection with explainable AI and role-based dashboard**
+A real-time, explainable machine-learning system for detecting fraudulent UPI (Unified Payments Interface) transactions. Built as a final-year major project, it combines an XGBoost classifier with SHAP-based explainability and a 0–100 risk-scoring engine to flag suspicious digital payments as they happen.
 
-[Dashboard Repo](https://github.com/Harshit786zs/fraud-dashboard) • [API Docs](http://localhost:8000/docs)
-
-</div>
-
----
+**🔗 Live Dashboard (frontend):** [fraud-dashboard](https://github.com/Harshit786zs/fraud-dashboard) — React dashboard with live transaction feed, Razorpay test-mode payment simulation, and model analytics.
 
 ## Overview
 
-UPI fraud in India grew **85% year-over-year** in FY 2024-25. This system detects fraudulent transactions in real-time using a hybrid ML ensemble, explains every decision using SHAP, and visualizes everything on a live React dashboard with role-based access.
-
----
-## 📸 Screenshots
-
-### API Documentation
-![API](reports/api-docs.png)
-
-### Login Page
-![Login](reports/login.png)
-
-### Live Transaction Feed
-![Live Feed](reports/live-feed.png)
-
-### Transaction Tester
-![Tester](reports/tester.png)
-
-### Model Performance
-![Models](reports/models.png)
-
-## Architecture
-Dataset → Cleaning → Feature Engineering → XGBoost Model
-→ SHAP Explainability → Risk Scoring (0–100)
-→ FastAPI Backend → React Dashboard
-
----
-
-## Model Performance
-
-| Model | ROC-AUC |
-|---|---|
-| Logistic Regression | 96.34% |
-| Random Forest | 96.07% |
-| **XGBoost** ✅ | **97.94%** |
-
-> 283,726 transactions • 473 fraud cases • SMOTE applied
-
----
+This system uses an XGBoost classifier along with engineered transaction features to detect suspicious payment patterns in real time. Every prediction comes with a SHAP-based explanation of *why* the model flagged it, and a risk score (0–100) that maps to actionable tiers for downstream systems.
 
 ## Features
 
-- ⚡ **Live transaction feed** — scored by XGBoost every 1.8s
-- 🚨 **Real-time alerts** — popup when fraud is blocked
-- 🧪 **Transaction tester** — test any amount instantly
-- 🔐 **Role-based login** — Admin and Analyst roles
-- 📈 **Analytics** — live fraud trend charts
-- 🤖 **SHAP explainability** — feature importance plots
-
----
+- Real-time fraud prediction via REST API
+- XGBoost classifier — **97.94% ROC-AUC**
+- SHAP explainability — per-transaction feature attribution for every prediction
+- Dynamic 0–100 risk scoring with three tiers:
+  - **LOW** — score ≤ 30
+  - **MEDIUM** — score ≤ 55
+  - **HIGH** — score > 55
+- High-value transaction detection
+- Night-time transaction monitoring
+- FastAPI REST API with auto-generated docs
+- Model performance comparison across algorithms
 
 ## Tech Stack
 
-**ML:** XGBoost, Scikit-Learn, SHAP, SMOTE  
-**Backend:** FastAPI, Uvicorn, Pydantic  
-**Frontend:** React, Recharts, Axios
+- Python
+- FastAPI
+- XGBoost
+- SHAP
+- Scikit-learn
+- Pandas / NumPy
+- Joblib
 
----
+## Machine Learning Models
 
-## Quick Start
+| Model               | ROC-AUC |
+| -------------------- | ------- |
+| Logistic Regression | 96.34%  |
+| Random Forest        | 96.07%  |
+| **XGBoost**           | **97.94%**  |
 
-```bash
-# 1. Clone
-git clone https://github.com/Harshit786zs/Upi_Fraud_Detection.git
-cd Upi_Fraud_Detection
+XGBoost achieved the best performance and was selected for deployment.
 
-# 2. Setup
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+## Risk Scoring
 
-# 3. Add dataset → data/raw/creditcard.csv
-# Download from: kaggle.com/datasets/mlg-ulb/creditcardfraud
+Each transaction receives a risk score from 0–100, derived from the model's fraud probability plus weighted business rules (transaction amount, time-of-day, velocity). Scores map to three response tiers:
 
-# 4. Run pipeline
-python src/cleaning/cleaner.py
-python src/features/engineer.py
-python src/models/train.py
-
-# 5. Start API
-uvicorn src.api.main:app --reload --port 8000
-
-# 6. Start Dashboard
-cd ../fraud-dashboard && npm install && npm start
-```
-
----
-
-## Login Credentials
-
-| Role | Username | Password |
-|---|---|---|
-| Admin | `admin` | `admin123` |
-| Analyst | `analyst` | `analyst123` |
-
----
+| Score Range | Tier   | Suggested Action       |
+| ----------- | ------ | ----------------------- |
+| 0 – 30      | LOW    | Allow                   |
+| 31 – 55     | MEDIUM | Flag for review         |
+| 56 – 100    | HIGH   | Block / step-up auth    |
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/` | API status |
-| GET | `/health` | Health check |
-| GET | `/stats` | Model metrics |
-| POST | `/predict` | Fraud prediction |
+### `GET /`
+Returns API status.
 
----
+### `GET /health`
+Checks API health.
 
-## Project Structure
-src/
-├── cleaning/        # Data preprocessing
-├── features/        # Feature engineering
-├── models/          # ML training & evaluation
-├── explainability/  # SHAP analysis
-├── risk_scoring/    # 0–100 risk engine
-└── api/             # FastAPI backend
----
+### `GET /stats`
+Displays model performance metrics.
 
-<div align="center">
+### `POST /predict`
+Predicts fraud probability, generates a risk score, and returns SHAP-based feature explanations for a transaction.
 
-**Harshit Choudhary**  
-[![GitHub](https://img.shields.io/badge/GitHub-Harshit786zs-181717?style=flat-square&logo=github)](https://github.com/Harshit786zs)
+Once running, interactive API docs are available at `http://localhost:8000/docs`.
 
-</div>
+## Project Workflow
+
+1. Data Collection
+2. Data Preprocessing
+3. Feature Engineering
+4. Model Training
+5. Model Evaluation
+6. Risk Scoring
+7. SHAP Explainability Integration
+8. API Deployment with FastAPI
+
+## Installation
+
+```bash
+git clone https://github.com/Harshit786zs/Upi_Fraud_Detection.git
+cd Upi_Fraud_Detection
+
+python -m venv venv
+venv\Scripts\activate        # Windows
+# source venv/bin/activate   # macOS/Linux
+
+pip install -r requirements.txt
+
+uvicorn src.api.main:app --reload --port 8000
+```
+
+The API will be live at `http://localhost:8000`, with interactive docs at `http://localhost:8000/docs`.
+
+## Frontend Dashboard
+
+A companion React + Vite dashboard consumes this API and provides:
+- Live transaction feed with real-time fraud flags
+- A "Pay" tab with QR code generation and Razorpay test-mode checkout
+- Model analytics, transaction history, and a personal UPI profile
+
+See the [fraud-dashboard repo](https://github.com/Harshit786zs/fraud-dashboard) for setup instructions.
+
+## Future Enhancements
+
+- Power BI / advanced analytics dashboard
+- Real-time streaming detection (Kafka/WebSockets)
+- Geo-location risk analysis
+- Cloud deployment
+
+## Author
+
+**Harshit Choudhary**
+[GitHub](https://github.com/Harshit786zs)
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
